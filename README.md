@@ -20,16 +20,16 @@ The project follows a typical microservices architecture with Docker containers 
 
 ## Secrets
 
-You need to store the following secrets in your GitHub repository to deploy correctly:
+Following secrets are stored in GitHub repository to deploy correctly:
 
-- **EC2_SSH_PRIVATE_KEY**: The private SSH key for accessing your EC2 instance.
-- **EC2_PUBLIC_IP**: The public IP address of your EC2 instance.
+- **EC2_SSH_PRIVATE_KEY**: The private SSH key for accessing the EC2 instance.
+- **EC2_PUBLIC_IP**: The public IP address of the EC2 instance.
 
 ## Ensure the Private Key is Correctly Stored in GitHub Secrets
 
-Since GitHub Actions does not support multi-line secrets properly, ensure your private key is base64-encoded before storing it:
+Since GitHub Actions does not support multi-line secrets properly, ensure the private key is base64-encoded before storing it:
 
-On your local machine, run:
+On the local machine, run:
 
 base64 -w 0 pipelinekey.pem
 
@@ -41,7 +41,7 @@ Copy the base64 output and save it as a GitHub Secret named EC2_SSH_PRIVATE_KEY.
 
 1. Clone the repository:
     ```bash
-    git clone <your-repository-url>
+    git clone <repository-url>
     cd <repository-folder>
     ```
 
@@ -54,11 +54,11 @@ Copy the base64 output and save it as a GitHub Secret named EC2_SSH_PRIVATE_KEY.
 
 ## How to Run Remotely (AWS EC2)
 
-Before running the pipeline on AWS EC2, you need to set up your EC2 instance and install Docker. Follow the steps below to get your EC2 instance ready:
+Before running the pipeline on AWS EC2, to set up the EC2 instance and install Docker. Follow the steps below to get the EC2 instance ready:
 
-1. **SSH into your EC2 instance**:
+1. **SSH into EC2 instance**:
     ```bash
-    ssh ubuntu@<your-ec2-public-ip>
+    ssh ubuntu@<ec2-public-ip>
     ```
 
 2. **Install Docker and Docker Compose**:
@@ -69,18 +69,18 @@ Before running the pipeline on AWS EC2, you need to set up your EC2 instance and
     sudo systemctl enable docker
     ```
 
-3. **Add your user to the Docker group**:
+3. **Add user to the Docker group**:
     ```bash
     sudo usermod -aG docker $USER
     ```
 
-4. **Clone the GitHub repository to your EC2 instance**:
+4. **Clone the GitHub repository to EC2 instance**:
     ```bash
     git clone https://github.com/mohanwk123/pipeline.git
     cd pipeline/
     ```
 
-5. **Configure Git to store your credentials**:
+5. **Configure Git to store credentials**:
     ```bash
     git config credential.helper store
     ```
@@ -90,12 +90,12 @@ Before running the pipeline on AWS EC2, you need to set up your EC2 instance and
     git pull
     ```
 
-Once your EC2 instance is set up and the repository is cloned, the **GitHub Actions** pipeline will automatically trigger and deploy the app to the EC2 instance.
+Once the EC2 instance is set up and the repository is cloned, the **GitHub Actions** pipeline will automatically trigger and deploy the app to the EC2 instance.
 
 ## How to Deploy to AWS EC2
 
-1. Push your changes to the **main** branch on GitHub.
-2. GitHub Actions will automatically trigger the pipeline to run the security scan and then deploy the app to your EC2 instance.
+1. Push the changes to the **main** branch on GitHub.
+2. GitHub Actions will automatically trigger the pipeline to run the security scan and then deploy the app to the EC2 instance.
 
 ## Files Structure
 
